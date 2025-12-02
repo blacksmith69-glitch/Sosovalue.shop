@@ -1,1 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Add Balance — S O S O V A L U E   S H O P</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo-mini">SV</div>
+      <div><div style="font-weight:800">S O S O V A L U E &nbsp;&nbsp; S H O P</div><div class="muted" style="font-size:12px">Add Balance</div></div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
 
+  <main class="container" style="margin-top:110px;max-width:640px">
+    <div class="card">
+      <h3>Add Balance</h3>
+      <p class="muted">Enter the USD amount you want to deposit. You'll be redirected to OxaPay checkout instantly.</p>
+
+      <div style="margin-top:12px">
+        <label class="muted">Amount (USD)</label>
+        <input id="add_amount" type="number" min="1" value="5" />
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:10px">
+        <button class="btn" onclick="startOxaPay()">Continue</button>
+        <a class="ghost" href="dashboard.html">Cancel</a>
+      </div>
+
+      <div style="margin-top:10px" class="muted">Supported coins depend on OxaPay configuration. After payment completes your balance will be updated via webhook.</div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    // startOxaPay() is defined in app.js. If you haven't built backend yet, it will open a fallback link.
+  </script>
+</body>
+</html>
