@@ -1,1 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — S O S O V A L U E   S H O P</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo-mini">SV</div>
+      <div><div style="font-weight:800">S O S O V A L U E &nbsp;&nbsp; S H O P</div><div class="muted" style="font-size:12px">Dashboard</div></div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="#" onclick="logout()">Sign Out</a>
+    </nav>
+  </header>
 
+  <main class="container" style="margin-top:110px">
+    <div class="grid cols-2">
+      <div>
+        <div class="card">
+          <h3>Welcome, <span id="dashUser">Guest</span></h3>
+          <div class="muted">USD Balance</div>
+          <div style="font-size:28px;font-weight:800" id="dashBalance">$0.00</div>
+          <div style="margin-top:12px">
+            <button class="btn" onclick="location.href='addbalance.html'">Add Balance</button>
+            <button class="ghost" onclick="location.href='orders.html'">Orders</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h4>Quick Actions</h4>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" onclick="location.href='shop.html'">Open Shop</button>
+            <button class="ghost" onclick="location.href='addbalance.html'">Top Up</button>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h4>Recent Orders</h4>
+          <div id="recentOrders" style="margin-top:8px" class="muted">No orders yet.</div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <h4>Delivery Times</h4>
+          <p class="muted">Referral start: 15–25 minutes. Rebate EXP start: 30–45 minutes.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>© Sosovalue Shop — Built for cryptowithAryanog</footer>
+
+  <script src="app.js"></script>
+  <script>
+    (function(){
+      const s = JSON.parse(localStorage.getItem('sv_session')||'null');
+      if(!s) { location.href='login.html'; return; }
+      document.getElementById('dashUser').textContent = s.username;
+      const users = JSON.parse(localStorage.getItem('sv_users')||'[]');
+      const me = users.find(u=>u.id===s.id);
+      const bal = me ? me.balance : 0;
+      document.getElementById('dashBalance').textContent = `$${(bal||0).toFixed(2)}`;
+
+      // recent orders
+      const orders = JSON.parse(localStorage.getItem('sv_orders')||'[]').filter(o=>o.userId===s.id).slice(0,5);
+      const recent = document.getElementById('recentOrders');
+      if(orders.length===0) recent.textContent = 'No orders yet.';
+      else {
+        recent.innerHTML = '<ul style="margin:0;padding:0;list-style:none">';
+        orders.forEach(o=>{
+          recent.innerHTML += `<li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03)">${o.id} • ${o.product} • ${o.qty.toLocaleString()} • $${o.price.toFixed(2)}</li>`;
+        });
+        recent.innerHTML += '</ul>';
+      }
+    })();
+
+    function logout(){ localStorage.removeItem('sv_session'); location.href='index.html'; }
+  </script>
+</body>
+</html>
