@@ -1,1 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shop — S O S O V A L U A L U E   S H O P</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo-mini">SV</div>
+      <div><div style="font-weight:800">S O S O V A L U E &nbsp;&nbsp; S H O P</div><div class="muted" style="font-size:12px">Shop</div></div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="orders.html">Orders</a>
+    </nav>
+  </header>
 
+  <main class="container" style="margin-top:110px">
+    <div class="card">
+      <h3>Products</h3>
+      <p class="muted">Select a product, enter quantity and referral link, confirm order. Orders are charged from your USD balance.</p>
+
+      <div class="products" style="margin-top:14px" id="shopProducts"></div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    (function(){
+      // same PRODUCTS list as in app.js; we will render buttons to go to buy page
+      const PRODUCTS = [
+        {id:'V0', title:'Sosovalue V0 Referral', displayPrice:'$2 per 1,000', min:1000, max:100000000},
+        {id:'V1', title:'Sosovalue V1 Referral', displayPrice:'$10 per 100', min:100, max:10000000},
+        {id:'V2', title:'Sosovalue V2 Referral', displayPrice:'$15 per 100', min:50, max:1000000},
+        {id:'REBATE', title:'Rebate EXP', displayPrice:'$1 per 1,000,000', min:1000000, max:1000000000}
+      ];
+      const out = document.getElementById('shopProducts');
+      PRODUCTS.forEach(p=>{
+        const div = document.createElement('div'); div.className='product';
+        div.innerHTML = `<h3>${p.title}</h3><div class="meta">${p.displayPrice}</div><div class="meta">Min: ${p.min.toLocaleString()} • Max: ${p.max.toLocaleString()}</div><button class="btn" onclick="location.href='buy.html?prod=${p.id}'">Buy</button>`;
+        out.appendChild(div);
+      });
+    })();
+  </script>
+</body>
+</html>
