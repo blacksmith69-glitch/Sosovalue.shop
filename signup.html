@@ -1,1 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create Account — S O S O V A L U E   S H O P</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo-mini">SV</div>
+      <div><div style="font-weight:800">S O S O V A L U E &nbsp;&nbsp; S H O P</div><div class="muted" style="font-size:12px">Create Account</div></div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="login.html">Sign In</a>
+    </nav>
+  </header>
 
+  <main class="container" style="max-width:900px;margin-top:120px">
+    <div class="card">
+      <h2>Create Account</h2>
+      <p class="muted">No email or phone required — only username & password.</p>
+
+      <div style="margin-top:14px">
+        <label class="muted">Username</label>
+        <input id="su_username" />
+      </div>
+      <div style="margin-top:10px">
+        <label class="muted">Password</label>
+        <input id="su_password" type="password" />
+      </div>
+      <div style="margin-top:10px">
+        <label class="muted">Confirm Password</label>
+        <input id="su_confirm" type="password" />
+      </div>
+
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button class="btn" onclick="signup()">Create Account</button>
+        <a href="login.html" class="ghost" style="display:inline-flex;align-items:center;padding:10px 14px">Already have an account</a>
+      </div>
+
+      <div style="margin-top:12px" class="muted">Usernames are unique. You will be redirected to the dashboard after sign up.</div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    (function(){ try{ const s = JSON.parse(localStorage.getItem('sv_session')||'null'); if(s) location.href='dashboard.html'; }catch(e){} })();
+  </script>
+</body>
+</html>
