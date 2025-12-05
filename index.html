@@ -497,8 +497,8 @@
         <input id="buy_qty" class="apple-input" type="number" value="${prod.min}" min="${prod.min}" />
       </div>
       <div class="apple-row">
-        <label class="input-label">Referral Link / Code</label>
-        <input id="buy_ref" class="apple-input" type="text" placeholder="https://sosovalue.app/ref/abcd" />
+        <label class="input-label">Referral Code / Code</label>
+        <input id="buy_ref" class="apple-input" type="text" placeholder="eg. A3JDB26T" />
       </div>
       <div class="apple-row">
         <label class="input-label">Price</label>
@@ -537,7 +537,7 @@
       errBox.classList.add('visible'); navigator.vibrate?.(150); return;
     }
     if(!ref){
-      errBox.textContent = 'Referral link required'; errBox.classList.add('visible'); navigator.vibrate?.(150); return;
+      errBox.textContent = 'Referral code required'; errBox.classList.add('visible'); navigator.vibrate?.(150); return;
     }
 
     const userId = sessionStorage.getItem('sv_user_id');
@@ -552,7 +552,7 @@
       const res = await fetch(`${API}/place-order`, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({user_id:userId, product:prod.title, qty, price})
+        body:JSON.stringify({user_id:userId, product:prod.title, qty, price, referral_code: ref})
       });
       const body = await parseResponseBody(res);
       if(res.ok && body.success){
